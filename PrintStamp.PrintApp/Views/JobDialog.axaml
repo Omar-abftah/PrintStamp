@@ -1,0 +1,40 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="PrintStamp.PrintApp.Views.JobDialog"
+        Title="PrintStamp" Width="1150" Height="680" CanResize="False"
+        WindowStartupLocation="CenterScreen" Topmost="True"
+        FlowDirection="RightToLeft">
+  <Grid ColumnDefinitions="Auto,*" Margin="16">
+
+    <!-- form (column 0 = right side in RTL) -->
+    <StackPanel Grid.Column="0" Width="300" Spacing="8" Margin="0,0,16,0">
+      <TextBlock Text="الجهة الصادرة"/>
+      <ComboBox x:Name="Issuer" HorizontalAlignment="Stretch" PlaceholderText="اختر..."/>
+
+      <TextBlock Text="الجهة المستلمة" Margin="0,8,0,0"/>
+      <ComboBox x:Name="Receiver" HorizontalAlignment="Stretch" PlaceholderText="اختر..."/>
+
+      <TextBlock Text="التاريخ والوقت" Margin="0,8,0,0"/>
+      <TextBlock x:Name="StampText" FontSize="16" FlowDirection="LeftToRight" HorizontalAlignment="Right"/>
+
+      <TextBlock Text="اضغط على الصفحة لتحديد مكان الباركود (يمكنك السحب)"
+                 TextWrapping="Wrap" Margin="0,16,0,0"/>
+
+      <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,16,0,0">
+        <Button x:Name="Ok" Content="متابعة" IsEnabled="False" Click="Ok_Click"/>
+        <Button Content="إلغاء" Click="Cancel_Click"/>
+      </StackPanel>
+    </StackPanel>
+
+    <!-- preview. LeftToRight on purpose: Canvas coordinates must not be mirrored by the RTL window -->
+    <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+      <Grid x:Name="PreviewHost" Height="600" FlowDirection="LeftToRight">
+        <Image x:Name="PreviewImage" Stretch="Uniform"/>
+        <Canvas x:Name="Overlay" Background="Transparent">
+          <Border x:Name="Marker" BorderBrush="Red" BorderThickness="2"
+                  Background="#33FF0000" IsHitTestVisible="False" IsVisible="False"/>
+        </Canvas>
+      </Grid>
+    </Border>
+  </Grid>
+</Window>
