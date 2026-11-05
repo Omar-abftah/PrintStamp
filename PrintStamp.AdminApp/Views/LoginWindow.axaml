@@ -1,0 +1,20 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="PrintStamp.AdminApp.Views.LoginWindow"
+        Title="PrintStamp - الإدارة" Width="360" SizeToContent="Height" CanResize="False"
+        WindowStartupLocation="CenterScreen" FlowDirection="RightToLeft">
+    <StackPanel Margin="20" Spacing="8">
+        <TextBlock x:Name="Heading" FontSize="18" FontWeight="SemiBold" Text="تسجيل الدخول"/>
+        <TextBlock Text="اسم المستخدم"/>
+        <TextBox x:Name="UserBox"/>
+        <TextBlock Text="كلمة المرور"/>
+        <TextBox x:Name="PassBox" PasswordChar="●"/>
+        <StackPanel x:Name="ConfirmPanel" IsVisible="False" Spacing="8">
+            <TextBlock Text="تأكيد كلمة المرور"/>
+            <TextBox x:Name="ConfirmBox" PasswordChar="●"/>
+        </StackPanel>
+        <TextBlock x:Name="ErrorText" Foreground="Red" TextWrapping="Wrap" IsVisible="False"/>
+        <Button x:Name="GoButton" Content="دخول" IsDefault="True" Margin="0,8,0,0"
+                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Click="Go_Click"/>
+    </StackPanel>
+</Window>

@@ -1,0 +1,57 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="PrintStamp.AdminApp.Views.MainWindow"
+        Title="PrintStamp - الإدارة" Width="900" Height="640"
+        WindowStartupLocation="CenterScreen" FlowDirection="RightToLeft">
+  <TabControl x:Name="Tabs" Margin="8">
+
+    <TabItem Header="مسح الباركود">
+      <Grid RowDefinitions="Auto,Auto,*" Margin="16">
+        <StackPanel Grid.Row="0" Spacing="8">
+          <TextBlock Text="امسح الباركود (أو اكتب الرمز ثم Enter)"/>
+          <TextBox x:Name="CodeBox" FontSize="24" FlowDirection="LeftToRight"/>
+        </StackPanel>
+
+        <Border Grid.Row="1" Margin="0,16" Padding="16" BorderBrush="Gray" BorderThickness="1" CornerRadius="6">
+          <StackPanel Spacing="6">
+            <TextBlock x:Name="ResCode"     FontSize="14" Foreground="Gray"/>
+            <TextBlock x:Name="ResIssuer"   FontSize="20"/>
+            <TextBlock x:Name="ResReceiver" FontSize="20"/>
+            <TextBlock x:Name="ResDate"     FontSize="16"/>
+            <TextBlock x:Name="ResPages"    FontSize="16"/>
+            <TextBlock x:Name="ResError"    FontSize="18" Foreground="Red" TextWrapping="Wrap" IsVisible="False"/>
+          </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="2" Spacing="4">
+          <TextBlock Text="آخر عمليات البحث" FontWeight="SemiBold"/>
+          <ListBox x:Name="LogList" Height="200"/>
+        </StackPanel>
+      </Grid>
+    </TabItem>
+
+    <TabItem Header="الجهات">
+      <Grid ColumnDefinitions="*,300" Margin="16">
+        <ListBox x:Name="EntityList" Grid.Column="0" SelectionChanged="EntityList_SelectionChanged"/>
+        <StackPanel Grid.Column="1" Margin="16,0,0,0" Spacing="8">
+          <TextBlock x:Name="EntityModeText" Text="جهة جديدة" FontWeight="SemiBold"/>
+          <TextBox x:Name="EntityNameBox"/>
+          <Button x:Name="AddBtn" Content="إضافة جهة جديدة" IsEnabled="False" Click="AddEntity_Click"/>
+          <Button x:Name="RenameBtn" Content="حفظ التعديل" IsEnabled="False" Click="Rename_Click"/>
+          <Button x:Name="ToggleBtn" Content="تعطيل / تفعيل المحددة" IsEnabled="False" Click="Toggle_Click"/>
+          <Button x:Name="NewBtn" Content="إلغاء التحديد" IsEnabled="False" Click="NewEntity_Click"/>
+          <TextBlock x:Name="EntityMsg" Foreground="Red" TextWrapping="Wrap"/>
+        </StackPanel>
+      </Grid>
+    </TabItem>
+    
+    <TabItem Header="النظام">
+      <StackPanel Margin="16" Spacing="12" MaxWidth="500" HorizontalAlignment="Left">
+        <TextBlock TextWrapping="Wrap"
+                   Text="حذف التطبيق وكل البيانات من هذا الجهاز. يتطلب إعادة إدخال كلمة المرور."/>
+        <Button Content="حذف التطبيق وكل البيانات" Background="DarkRed" Foreground="White" Click="Wipe_Click"/>
+      </StackPanel>
+    </TabItem>
+
+  </TabControl>
+</Window>

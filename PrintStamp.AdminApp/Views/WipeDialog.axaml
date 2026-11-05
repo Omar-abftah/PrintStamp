@@ -1,0 +1,20 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="PrintStamp.AdminApp.Views.WipeDialog"
+        Title="حذف التطبيق" Width="440" SizeToContent="Height" CanResize="False"
+        WindowStartupLocation="CenterOwner" FlowDirection="RightToLeft">
+    <StackPanel Margin="20" Spacing="8">
+        <TextBlock Text="سيتم حذف كل شيء نهائيًا" FontSize="18" FontWeight="SemiBold" Foreground="Red"/>
+        <TextBlock TextWrapping="Wrap"
+                   Text="كل السجلات والباركودات، الملفات المؤقتة، الإعدادات، والتطبيق نفسه. لا يمكن التراجع عن ذلك."/>
+        <TextBlock Text="كلمة مرور المسؤول" Margin="0,8,0,0"/>
+        <TextBox x:Name="PassBox" PasswordChar="●"/>
+        <TextBlock Text="اكتب كلمة (حذف) للتأكيد"/>
+        <TextBox x:Name="ConfirmBox"/>
+        <TextBlock x:Name="Err" Foreground="Red" TextWrapping="Wrap" IsVisible="False"/>
+        <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
+            <Button x:Name="GoBtn" Content="حذف كل شيء" IsEnabled="False" Click="Go_Click"/>
+            <Button Content="إلغاء" Click="Cancel_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
