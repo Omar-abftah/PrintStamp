@@ -41,7 +41,7 @@ public sealed class JobProcessor(IJobStore store, JobWatcher watcher, IPdfPrinte
         await store.SetBarcodePosAsync(input.BarcodePos);   // last confirmed position = new default
         var job = await store.CreateJobAsync(input.IssuerId, input.ReceiverId, input.CreatedAt, pages);
 
-        Directory.CreateDirectory(AppPaths.Work);
+        HiddenFolder.Ensure(AppPaths.Work);
         var stamped = Path.Combine(AppPaths.Work, job.Code + ".pdf");
         PdfStamper.Stamp(path, stamped, job.Code, input.BarcodePos);
 
@@ -52,13 +52,13 @@ public sealed class JobProcessor(IJobStore store, JobWatcher watcher, IPdfPrinte
         catch
         {
             // the DB row already exists, so keep the stamped file for a retry instead of making a second code
-            Directory.CreateDirectory(AppPaths.Failed);
+            HiddenFolder.Ensure(AppPaths.Failed);
             File.Move(stamped, Path.Combine(AppPaths.Failed, job.Code + ".pdf"), overwrite: true);
             File.Delete(path);
             throw;
         }
 
-        Directory.CreateDirectory(AppPaths.Done);
+        HiddenFolder.Ensure(AppPaths.Done);
         File.Move(stamped, Path.Combine(AppPaths.Done, job.Code + ".pdf"), overwrite: true);
         File.Delete(path);   // the unstamped original is never kept
         Console.WriteLine($"Job {job.Code}: {pages} page(s) stamped and sent to print");
